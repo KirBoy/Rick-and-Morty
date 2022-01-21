@@ -1,25 +1,25 @@
 import React, {Dispatch, FC, SetStateAction, useRef} from 'react';
 import {CharactersType, FiltersType} from "../types";
 
-type Modal = {
+type PopupType = {
     user: CharactersType
-    setModal: Dispatch<SetStateAction<CharactersType | null>>;
+    setPopup: Dispatch<SetStateAction<CharactersType | null>>;
 }
 
-const Modal: FC<Modal> = ({user, setModal}) => {
+const Popup: FC<PopupType> = ({user, setPopup}) => {
     const modal = useRef(null)
 
     const closeModal = (e: React.MouseEvent<HTMLDivElement>) => {
         if (modal.current == e.target) {
-            setModal(null)
+            setPopup(null)
         }
 
     }
     const date = new Date(user.created)
 
     return (
-        <div className='modal' onClick={closeModal} ref={modal}>
-            <div className='modal_inner'>
+        <div className='popup' onClick={closeModal} ref={modal}>
+            <div className='popup_inner'>
                 <img className='char_img char_img--big' src={user.image} alt=""/>
                 <div>
                     <h2 className='char_name'>{user.name}</h2>
@@ -41,7 +41,7 @@ const Modal: FC<Modal> = ({user, setModal}) => {
                         <span>{user.type}</span>
                     </div>}
                     <div className='char_info'>
-                        <span className='char_desc'>From</span>
+                        <span className='char_desc'>Last known location</span>
                         <span>{user.origin.name}</span>
                     </div>
                     <div className='char_info'>
@@ -58,4 +58,4 @@ const Modal: FC<Modal> = ({user, setModal}) => {
     );
 };
 
-export default Modal;
+export default Popup;
